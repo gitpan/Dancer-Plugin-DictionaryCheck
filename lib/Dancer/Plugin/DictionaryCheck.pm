@@ -11,17 +11,15 @@ Dancer::Plugin::DictionaryCheck
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
 Supplies Dancer functionality to check strings (passwords) for dictionary words.
-
-Perhaps a little code snippet.
 
     use Dancer::Plugin::DictionaryCheck;
 
@@ -30,6 +28,9 @@ Perhaps a little code snippet.
             good_password => (! dictionary_check params->{password} )
         };
     }
+
+By default makes use /usr/share/dict/web2 which is present in standard debian
+images.
 
 =cut
 
@@ -67,7 +68,7 @@ register 'dictionary_load' => sub {
     my $dict_file = shift;
 
     return 0 if (   ! -e $dict_file
-                 || ! -f $dict_file );
+                 || ! -f _ );
 
     return _load_dict($dict_file);
 };
